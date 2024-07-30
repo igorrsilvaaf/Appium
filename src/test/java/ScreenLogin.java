@@ -12,6 +12,7 @@ import java.time.Duration;
 public class ScreenLogin {
     private WebDriver driver;
 
+    //Inicializa o drive do Appium
     public ScreenLogin(RemoteWebDriver driver) {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }

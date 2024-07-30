@@ -7,13 +7,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class LoginTest {
+public class RealizaCompraTest {
 
-    private static ScreenLogin testScreenLogin;
-
-    public LoginTest(RemoteWebDriver driver) {
-        testScreenLogin = new ScreenLogin(driver);
-    }
+    private static ScreenRealizaCompra testScreenRealizaCompra;
+    private static LoginTest loginTest;
 
     @BeforeClass
     public static void caps() throws MalformedURLException {
@@ -24,11 +21,13 @@ public class LoginTest {
         //capabilities.setCapability("appPackage", "com.qazandoqafood"); // Apenas alguns APP usam
         capabilities.setCapability("automationName", "UiAutomator2");
         RemoteWebDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), capabilities);
-        testScreenLogin = new ScreenLogin(driver);
+        loginTest = new LoginTest(driver);
+        testScreenRealizaCompra = new ScreenRealizaCompra(driver);
     }
 
     @Test
-    public void testLogin() throws InterruptedException {
-        testScreenLogin.realizaLogin();
+    public void testRealizaCompra() throws InterruptedException {
+        loginTest.testLogin();
+        testScreenRealizaCompra.realizaCompra();
     }
 }
