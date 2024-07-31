@@ -1,15 +1,14 @@
-import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
 public class ScreenRealizaCompra {
     private WebDriver driver;
@@ -19,8 +18,6 @@ public class ScreenRealizaCompra {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    //@AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Selecione seu endereço...\"]")
-    //@iOSXCUITFindBy(accessibility = "//android.widget.TextView[@text=\"Selecione seu endereço...\"]")
     @AndroidFindBy(accessibility = "address-button")
     @iOSXCUITFindBy(accessibility = "NaoHabilitado")
     private WebElement SelecionaEndereco;
@@ -45,8 +42,16 @@ public class ScreenRealizaCompra {
     @iOSXCUITFindBy(accessibility = "NaoHabilitado")
     private WebElement ConfirmOrder;
 
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[9]/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup")
+    @iOSXCUITFindBy(accessibility = "NaoHabilitado")
+    private WebElement FormaPagamento;
+
+    @AndroidFindBy(accessibility = "do-order-button")
+    @iOSXCUITFindBy(accessibility = "NaoHabilitado")
+    private WebElement FazerPedido;
+
     public void realizaCompra() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 
         wait.until(ExpectedConditions.visibilityOf(SelecionaEndereco));
         SelecionaEndereco.click();
@@ -57,9 +62,6 @@ public class ScreenRealizaCompra {
         wait.until(ExpectedConditions.visibilityOf(SelecionaLoja));
         SelecionaLoja.click();
 
-        wait.until(ExpectedConditions.visibilityOf(SelecionaEndereco));
-        SelecionaEndereco.click();
-
         wait.until(ExpectedConditions.visibilityOf(AddItem));
         AddItem.click();
 
@@ -68,5 +70,11 @@ public class ScreenRealizaCompra {
 
         wait.until(ExpectedConditions.visibilityOf(ConfirmOrder));
         ConfirmOrder.click();
+
+        wait.until(ExpectedConditions.visibilityOf(FormaPagamento));
+        FormaPagamento.click();
+
+        wait.until(ExpectedConditions.visibilityOf(FazerPedido));
+        FazerPedido.click();
     }
 }
